@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+smolagents
+huggingface_hub
+gradio
+python-dotenv
