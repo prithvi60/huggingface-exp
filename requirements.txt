@@ -4,3 +4,4 @@ smolagents
 huggingface_hub
 gradio
 python-dotenv
+openai
