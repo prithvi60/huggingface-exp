@@ -10,7 +10,7 @@ class Query(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"msg": "SmolAgent API is running."}
+    return {"msg": "SmolAgent API is running. Use POST /run with {'prompt': 'your task'}"}
 
 @app.post("/run")
 def run_query(data: Query):
@@ -22,3 +22,5 @@ def run_query(data: Query):
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
+    # uvicorn.run(app, host="127.0.0.1", port=8000)
+
