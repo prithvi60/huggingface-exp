@@ -3,3 +3,4 @@ uvicorn
 smolagents[litellm]
 huggingface_hub
 python-dotenv
+gradio
