@@ -1,9 +1,20 @@
-from fastapi import FastAPI, Request
+import os
+from fastapi import FastAPI
 from pydantic import BaseModel
 from agent_code import run_agent_task
-import uvicorn
+import gradio as gr
+from fastapi.middleware.cors import CORSMiddleware
 
+# FastAPI app
 app = FastAPI()
+
+# Enable CORS for cross-origin support (important if frontend is separate)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class Query(BaseModel):
     prompt: str
@@ -20,7 +31,16 @@ def run_query(data: Query):
     except Exception as e:
         return {"error": str(e)}
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8080)
-    # uvicorn.run(app, host="127.0.0.1", port=8000)
+# Gradio interface
+def gradio_interface(prompt):
+    return run_agent_task(prompt)
 
+gradio_app = gr.Interface(fn=gradio_interface, inputs="text", outputs="text", title="SmolAgent Gradio")
+
+# ✅ Mount Gradio inside FastAPI
+app = gr.mount_gradio_app(app, gradio_app, path="/gradio")
+
+# ✅ Uvicorn entry point
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8080)
