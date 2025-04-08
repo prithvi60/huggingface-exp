@@ -1,7 +1,5 @@
 fastapi
 uvicorn
-smolagents
+smolagents[litellm]
 huggingface_hub
-gradio
 python-dotenv
-openai
