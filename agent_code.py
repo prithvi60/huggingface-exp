@@ -25,6 +25,6 @@ agent = CodeAgent(
     model=openai_model
 )
 # The function we use in main.py to provide to api
-def run_agent_task(user_input: str) -> str:
+def raw_agent_run(user_input: str) -> str:
     return agent.run(user_input)
 

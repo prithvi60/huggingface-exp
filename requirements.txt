@@ -4,3 +4,6 @@ smolagents[litellm]
 huggingface_hub
 python-dotenv
 gradio
+openinference-instrumentation-smolagents
+opentelemetry-sdk
+opentelemetry-exporter-otlp
