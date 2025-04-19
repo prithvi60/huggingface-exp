@@ -7,3 +7,4 @@ gradio
 openinference-instrumentation-smolagents
 opentelemetry-sdk
 opentelemetry-exporter-otlp
+llama-cpp-python
