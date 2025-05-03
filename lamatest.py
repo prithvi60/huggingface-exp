@@ -1,7 +1,19 @@
-from llama_cpp import Llama
+# test_tool_call.py
+from smolagents import ToolCallingAgent, DuckDuckGoSearchTool
+from agent_model_setup import LlamaCppModel
 
-llm = Llama(model_path="models/mistral-7b-instruct-v0.2.Q4_K_M.gguf", n_ctx=4096)
 
-prompt = "[User] What can you do?\n[Assistant]"
-output = llm(prompt=prompt, max_tokens=256, temperature=0.7)
-print("🔁 Result:", output["choices"][0]["text"])
+def main():
+    model = LlamaCppModel()
+    agent = ToolCallingAgent(
+        tools=[DuckDuckGoSearchTool()],
+        model=model,
+        max_steps=3,
+        name="searcher",
+        description="Use search('…') to look things up on the web.",
+    )
+    result = agent.run("search('capital of France')")
+    print("Final answer:", result)
+
+if __name__ == "__main__":
+    main()
